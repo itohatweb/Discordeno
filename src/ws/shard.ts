@@ -251,7 +251,7 @@ async function heartbeat(
   if (shard.ws.readyState === WebSocket.CLOSED) {
     shard.needToResume = true;
     await resumeConnection(data, payload, shard.id);
-    heartbeating.delete(shard.id);
+    // heartbeating.delete(shard.id);
     return;
   }
 
