@@ -31,7 +31,11 @@ export async function handleInternalGuildRoleDelete(data: DiscordPayload) {
   const cachedRole = guild.roles.get(payload.role_id)!;
   if (cachedRole) eventHandlers.roleDelete?.(guild, cachedRole);
 
+  console.log("1", guild.roles.get(payload.role_id));
+
   guild.roles.delete(payload.role_id);
+
+  console.log("2", guild.roles.get(payload.role_id));
 
   // For bots without GUILD_MEMBERS member.roles is never updated breaking permissions checking.
   cacheHandlers.forEach("members", (member) => {
