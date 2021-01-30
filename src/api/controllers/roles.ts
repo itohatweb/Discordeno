@@ -45,6 +45,7 @@ export async function handleInternalGuildRoleDelete(data: DiscordPayload) {
   });
 
   guild.roles.delete(payload.role_id);
+  console.log("DELETED", cachedRole);
   eventHandlers.roleDelete?.(guild, cachedRole);
 }
 
