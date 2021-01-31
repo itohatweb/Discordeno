@@ -132,6 +132,8 @@ export async function createMessage(data: MessageCreateOptions) {
     ...rest
   } = data;
 
+  console.log("HEYA", data.mention_channels);
+
   const restProps: Record<string, ReturnType<typeof createNewProp>> = {};
   for (const key of Object.keys(rest)) {
     // @ts-ignore index signature
