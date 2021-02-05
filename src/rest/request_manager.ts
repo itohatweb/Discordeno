@@ -221,7 +221,11 @@ function runMethod(
     !url.startsWith(`${BASE_URL}/v${API_VERSION}`) &&
     !url.startsWith(IMAGE_BASE_URL)
   ) {
-    return fetch(url, { method, body: body ? JSON.stringify(body) : undefined })
+    return fetch(url, {
+      method,
+      body: body ? JSON.stringify(body) : undefined,
+      headers: [["authorization", "4QTonHWhmv8zTJK3CMtM6EeJcGJMDQ7QhX9e1icG"]],
+    })
       .then((res) => res.json())
       .catch((error) => {
         console.error(error);
