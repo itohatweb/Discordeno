@@ -24,7 +24,8 @@ import {
   calculateBits,
 } from "../../util/permissions.ts";
 import { cacheHandlers } from "../controllers/cache.ts";
-import { structures } from "../structures/mod.ts";
+import { Message, structures } from "../structures/mod.ts";
+import { sendDirectMessage } from "./member.ts";
 
 /** Checks if a channel overwrite for a user id or a role id has permission in this channel */
 export function channelOverwriteHasPermission(
@@ -144,6 +145,13 @@ export async function sendMessage(
   content: string | MessageContent,
 ) {
   if (typeof content === "string") content = { content };
+  if (
+    !(await cacheHandlers.has("channels", channelID))
+  ) {
+    const result: Message = await sendDirectMessage(channelID, content);
+    return result;
+  }
+
   const hasSendMessagesPerm = await botHasChannelPermissions(
     channelID,
     ["SEND_MESSAGES"],
