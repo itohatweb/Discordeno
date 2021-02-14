@@ -145,8 +145,6 @@ export async function sendDirectMessage(
     dmChannel = channelStruct;
   }
 
-  console.log("heya");
-
   // If it does exist try sending a message to this user
   return sendMessage(dmChannel.id, content);
 }
