@@ -148,6 +148,7 @@ export async function sendMessage(
   if (
     !(await cacheHandlers.has("channels", channelID))
   ) {
+    console.log("BETERAS");
     const result: Message = await sendDirectMessage(channelID, content);
     return result;
   }
