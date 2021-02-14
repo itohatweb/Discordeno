@@ -92,19 +92,19 @@ const baseMessage: Partial<Message> = {
       };
 
     return sendMessage(
-      this.guildID ? this.channelID! : this.author!.id,
+      this.channelID!,
       contentWithMention,
     );
   },
   send(content) {
     return sendMessage(
-      this.guildID ? this.channelID! : this.author!.id,
+      this.channelID!,
       content,
     );
   },
   alert(content, timeout = 10, reason = "") {
     return sendMessage(
-      this.guildID ? this.channelID! : this.author!.id,
+      this.channelID!,
       content,
     ).then((response) => {
       response.delete(reason, timeout * 1000).catch(console.error);
