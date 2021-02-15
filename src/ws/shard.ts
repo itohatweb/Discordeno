@@ -12,10 +12,10 @@ import {
   GatewayOpcode,
   ReadyPayload,
 } from "../types/mod.ts";
+import { Collection } from "../util/collection.ts";
 import { BotStatusRequest, delay } from "../util/utils.ts";
 import { decompressWith } from "./deps.ts";
 import { handleDiscordPayload } from "./shard_manager.ts";
-import { Collection } from "../util/collection.ts";
 
 const basicShards = new Collection<number, BasicShard>();
 const heartbeating = new Map<number, boolean>();
@@ -391,12 +391,7 @@ export function botGatewayStatusRequest(payload: BotStatusRequest) {
       op: GatewayOpcode.StatusUpdate,
       d: {
         since: null,
-        game: payload.game.name
-          ? {
-            name: payload.game.name,
-            type: payload.game.type,
-          }
-          : null,
+        activities: payload.activities,
         status: payload.status,
         afk: false,
       },
