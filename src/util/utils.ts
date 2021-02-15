@@ -1,6 +1,6 @@
 import { encode } from "../../deps.ts";
 import {
-  ActivityType,
+  ActivityPayload,
   ImageFormats,
   ImageSize,
   StatusType,
@@ -13,18 +13,14 @@ export const sleep = (timeout: number) => {
 
 export interface BotStatusRequest {
   status: StatusType;
-  game: {
-    name?: string;
-    type: ActivityType;
-  };
+  activities: Partial<ActivityPayload>[];
 }
 
 export function editBotsStatus(
   status: StatusType,
-  name?: string,
-  type = ActivityType.Game,
+  activities?: Partial<ActivityPayload>[],
 ) {
-  sendGatewayCommand("EDIT_BOTS_STATUS", { status, game: { name, type } });
+  sendGatewayCommand("EDIT_BOTS_STATUS", { status, activities });
 }
 
 export function chooseRandom<T>(array: T[]) {
